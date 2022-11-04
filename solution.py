@@ -50,6 +50,17 @@ def predict_sum_of_bits_in_nums_from_zero_to_arg(num, bit_number):
         result += num % divisor - 2 ** (bit_number - 1) + 1
     return result
    
+# If you do XOR'ing manually with 2-bit numbers you will note that there is a pattern repeating every 4 numbers, I have taken it
+# out into xor_pattern method
 
+def solution(start, length):
+    result = 0
+    for i in range(length, 0, -1):
+        result = result ^ (xor_pattern(start + i-1) ^ xor_pattern(start-1))
+        start = start + length
+    return result
 
+def xor_pattern(number):
+    result = [number, 1, number+1, 0]
+    return result[number % 4]
 
